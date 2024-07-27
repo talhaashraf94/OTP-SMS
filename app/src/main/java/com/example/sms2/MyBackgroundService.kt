@@ -28,7 +28,7 @@ class MyBackgroundService : Service() {
             coroutineScope.launch {
                 while (isRunning) {
                     fetchDataAndSendSMS()
-                    delay(1000) // Delay for 1 minute (60000ms) before next fetch
+                    delay(1000) // Delay for 1 second
                 }
             }
         }
@@ -38,7 +38,8 @@ class MyBackgroundService : Service() {
     private suspend fun fetchDataAndSendSMS() {
         withContext(Dispatchers.IO) {
             try {
-                val url = URL("https://47pz9bp14f.execute-api.me-south-1.amazonaws.com/Prod/otp")
+                val url = URL("https://my-backend.com/get_data")
+                val apiKey = "hakuna-matata"
                 val httpURLConnection = url.openConnection() as HttpURLConnection
                 httpURLConnection.requestMethod = "GET"
 
@@ -95,8 +96,8 @@ class MyBackgroundService : Service() {
     private suspend fun updateRowStatus(rowId: Long, newStatus: String) {
         withContext(Dispatchers.IO) {
             try {
-                val url = URL("https://g9lutwgepj.execute-api.me-south-1.amazonaws.com/prod/otp")
-                val apiKey = "mQP7e8tyrn8klIB6CJsmo6pMcbL9Vgfu7aZiTNn5"
+                val url = URL("https://my-backend/update_otp_request_status")
+                val apiKey = "hakuna-matata"
                 val httpURLConnection = url.openConnection() as HttpURLConnection
                 httpURLConnection.requestMethod = "POST"
                 httpURLConnection.doOutput = true
